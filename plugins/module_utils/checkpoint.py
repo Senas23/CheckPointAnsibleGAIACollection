@@ -88,6 +88,10 @@ def get_payload_from_parameters(params):
                     payload_list.append(get_payload_from_parameters(element_dict))
                 payload[parameter.replace("_", "-")] = payload_list
             else:
+                # special handling for this param in order to avoid two params called "version"
+                if parameter == "ntp_version":
+                    parameter = "version"
+
                 payload[parameter.replace("_", "-")] = parameter_value
     return payload
 
